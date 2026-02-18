@@ -3,6 +3,7 @@
 #include "SharedDefines.h"
 #include "Player.h"
 #include "QuestDef.h"
+#include "ObjectMgr.h"
 
 class IndividualPlayerProgression : public PlayerScript
 {
@@ -80,16 +81,12 @@ public:
 
             if (questId && !player->GetQuestRewardStatus(questId))
             {
-                bool wasInLog = player->GetQuestStatus(questId) != QUEST_STATUS_NONE;
-
-                player->CompleteQuest(questId);
-                player->SetQuestStatus(questId, QUEST_STATUS_REWARDED);
-                player->AddRewardedQuest(questId);
-
-                // remove from active quest log if present - npc for completion is gone at this stage
-                if (wasInLog)
+                if (Quest const* quest = sObjectMgr->GetQuestTemplate(questId))
                 {
-                    player->RemoveActiveQuest(questId);
+                    if (player->GetQuestStatus(questId) == QUEST_STATUS_NONE)
+                        player->AddQuest(quest, nullptr);
+
+                    player->RewardQuest(quest, 0, player);
                 }
             }
         }
