@@ -64,22 +64,19 @@ public:
         }
 
         // Force complete prerequisite for "What tomorrow brings" (scarab lord chain)
-        if(sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ))
+        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ))
         {
-            uint32 questId = 0;
-
-            if (player->GetTeamId(true) == TEAM_ALLIANCE)
-            {
-                questId = COMPLETE_WAR_EFFORT_ALLY;
-            }
-            else if (player->GetTeamId(true) == TEAM_HORDE)
-            {
-                questId = COMPLETE_WAR_EFFORT_HORDE;
-            }
+            uint32 questId = (player->GetTeamId(true) == TEAM_ALLIANCE)
+                ? COMPLETE_WAR_EFFORT_ALLY
+                : COMPLETE_WAR_EFFORT_HORDE;
 
             if (questId && !player->GetQuestRewardStatus(questId))
             {
                 player->CompleteQuest(questId);
+                player->SetQuestRewardStatus(questId);
+
+                if (player->GetQuestStatus(questId) != QUEST_STATUS_NONE)
+                    player->RemoveActiveQuest(questId);
             }
         }
 
