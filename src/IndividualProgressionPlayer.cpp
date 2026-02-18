@@ -2,6 +2,7 @@
 #include "naxxramas_40.h"
 #include "SharedDefines.h"
 #include "Player.h"
+#include "QuestDef.h"
 
 class IndividualPlayerProgression : public PlayerScript
 {
@@ -64,19 +65,32 @@ public:
         }
 
         // Force complete prerequisite for "What tomorrow brings" (scarab lord chain)
-        if (sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ))
+        if(sIndividualProgression->hasPassedProgression(player, PROGRESSION_PRE_AQ))
         {
-            uint32 questId = (player->GetTeamId(true) == TEAM_ALLIANCE)
-                ? COMPLETE_WAR_EFFORT_ALLY
-                : COMPLETE_WAR_EFFORT_HORDE;
+            uint32 questId = 0;
+
+            if (player->GetTeamId(true) == TEAM_ALLIANCE)
+            {
+                questId = COMPLETE_WAR_EFFORT_ALLY;
+            }
+            else
+            {
+                questId = COMPLETE_WAR_EFFORT_HORDE;
+            }
 
             if (questId && !player->GetQuestRewardStatus(questId))
             {
-                player->CompleteQuest(questId);
-                player->SetQuestRewardStatus(questId);
+                bool wasInLog = player->GetQuestStatus(questId) != QUEST_STATUS_NONE;
 
-                if (player->GetQuestStatus(questId) != QUEST_STATUS_NONE)
+                player->CompleteQuest(questId);
+                player->SetQuestStatus(questId, QUEST_STATUS_REWARDED);
+                player->AddRewardedQuest(questId);
+
+                // remove from active quest log if present - npc for completion is gone at this stage
+                if (wasInLog)
+                {
                     player->RemoveActiveQuest(questId);
+                }
             }
         }
 
