@@ -69,11 +69,11 @@ INSERT INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Ques
 UPDATE `quest_template`
 SET
  `RewardItem1` = 23705,
- `RewardItemAmount1` = 1,
+ `RewardAmount1` = 1,
  `RewardItem2` = 23713,
- `RewardItemAmount2` = 1,
+ `RewardAmount2` = 1,
  `RewardItem3` = 23720,
- `RewardItemAmount3` = 1
+ `RewardAmount3` = 1
 WHERE `ID` = 108744;
 
 -- don't count quests for the loremaster achievement
