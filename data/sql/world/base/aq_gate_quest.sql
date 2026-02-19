@@ -101,7 +101,7 @@ INSERT INTO `conditions` (`SourceTypeOrReferenceId`, `SourceGroup`, `SourceEntry
 -- (19, 0, 108745, 0, 1, 8, 0, 108743, 0, 0, 0, 0, 0, '', 'Quest \'Colossus of Zora\' requires either quest 8743 or 108743 to be completed'),
 (19, 0, 108746, 0, 0, 8, 0, 8743, 0, 0, 0, 0, 0, '',   'Quest \'Colossus of Regal\' requires either quest 8743 or 108743 to be completed'),
 -- (19, 0, 108746, 0, 1, 8, 0, 108743, 0, 0, 0, 0, 0, '', 'Quest \'Colossus of Regal\' requires either quest 8743 or 108743 to be completed'),
-(19, 0, 108747, 0, 0, 8, 0, 8743, 0, 0, 0, 0, 0, '',   'Quest \'Colossus of Ashi\' requires either quest 8743 or 108743 to be completed'),
+(19, 0, 108747, 0, 0, 8, 0, 8743, 0, 0, 0, 0, 0, '',   'Quest \'Colossus of Ashi\' requires either quest 8743 or 108743 to be completed');
 -- (19, 0, 108747, 0, 1, 8, 0, 108743, 0, 0, 0, 0, 0, '', 'Quest \'Colossus of Ashi\' requires either quest 8743 or 108743 to be completed');
 
 -- update quest texts for the new 'Simply Bang a Gong!' quest
